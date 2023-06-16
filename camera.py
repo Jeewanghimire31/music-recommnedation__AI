@@ -1,11 +1,10 @@
-import os
-
 import cv2
-import numpy as np
-from flask import Flask
+import os
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing.image import img_to_array
+from flask import Flask
+import numpy as np
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 face_classifier = cv2.CascadeClassifier(f'{root_path}/static/haarcascade.xml')
@@ -31,7 +30,9 @@ class Video(object):
         try:
             success, frame = self.camera.read()
             if success:
+                # Ger faces from frame
                 faces = face_classifier.detectMultiScale(frame, 1.3, 5)
+                #convert to gray scale
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
                 for x, y, w, h in faces:
                     # find the largest face in the image
@@ -53,7 +54,7 @@ class Video(object):
 
                     cv2.line(frame, (x1, y1), (x1-30, y1), (255, 0, 255), 6)
                     cv2.line(frame, (x1, y1), (x1, y1-30), (255, 0, 255), 6)
-
+            #(R,G,B) 0-255 (255,255,255)
 
                     roi_gray = gray[y:y + h, x:x + w]
                     roi_gray = cv2.resize(roi_gray, (48, 48), interpolation=cv2.INTER_AREA) # resize to 48x48
