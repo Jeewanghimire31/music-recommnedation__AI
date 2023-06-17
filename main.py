@@ -65,6 +65,9 @@ def musicap():
 def video():
     return Response(generate_video(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+
 @app.route("/videoapi", methods=["GET", "POST"])
 def videoapi():
     return camera.get_label()
