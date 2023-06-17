@@ -8,7 +8,7 @@ import numpy as np
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 face_classifier = cv2.CascadeClassifier(f'{root_path}/static/haarcascade.xml')
-classifier = load_model(f'{root_path}/static/model.h5')
+classifier = load_model(f'{root_path}/model.h5')
 emotion_labels = ['Happy', 'Neutral', 'Sad']
 
 
@@ -54,7 +54,6 @@ class Video(object):
 
                     cv2.line(frame, (x1, y1), (x1-30, y1), (255, 0, 255), 6)
                     cv2.line(frame, (x1, y1), (x1, y1-30), (255, 0, 255), 6)
-            #(R,G,B) 0-255 (255,255,255)
 
                     roi_gray = gray[y:y + h, x:x + w]
                     roi_gray = cv2.resize(roi_gray, (48, 48), interpolation=cv2.INTER_AREA) # resize to 48x48
