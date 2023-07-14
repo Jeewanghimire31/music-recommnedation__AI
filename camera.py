@@ -16,14 +16,20 @@ emotion_labels = ['Happy', 'Neutral', 'Sad']
 class Video(object):
     def __init__(self):
         self.emotionParameters = {}
-        if os.environ.get('WERKZEUG_RUN_MAIN') or Flask.debug is False:
-            self.camera = cv2.VideoCapture(0)
-            if not (self.camera.isOpened()):
-                print("Could not open video device")
-            # Set the resolution
-            self.camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-            self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+        # if os.environ.get('WERKZEUG_RUN_MAIN') or Flask.debug is False:
+        #     self.openCamera()
 
+    def __del__(self):
+        if hasattr(self, 'camera') and self.camera:
+            self.camera.release()
+        
+    def openCamera(self):
+        self.camera = cv2.VideoCapture(0)
+        if not (self.camera.isOpened()):
+            print("Could not open video device")
+        # Set the resolution
+        self.camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+        self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
     def get_frame(self, reset_predictions):
         try:
