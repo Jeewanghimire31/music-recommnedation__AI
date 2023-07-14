@@ -1,10 +1,11 @@
-import cv2
 import os
+
+import cv2
+import numpy as np
+from flask import Flask
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing.image import img_to_array
-from flask import Flask
-import numpy as np
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 face_classifier = cv2.CascadeClassifier(f'{root_path}/static/haarcascade.xml')
@@ -34,7 +35,7 @@ class Video(object):
                 faces = face_classifier.detectMultiScale(frame, 1.3, 5)
                 #convert to gray scale
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-                for x, y, w, h in faces:
+                for x, y, w, h in faces:  #x,y coordinate,  w, h width height
                     # find the largest face in the image
 
                     areas = [w*h for x, y, w, h in faces] # get areas of all faces
@@ -62,7 +63,8 @@ class Video(object):
                         roi = img_to_array(roi) # convert to array
                         roi = np.expand_dims(roi, axis=0) # reshape to 1, 48, 48, 1
                         prediction = classifier.predict(roi)[0] # predict the emotion on the face
-                        label = emotion_labels[prediction.argmax()] # get the label with max accuracy
+                        label = emotion_labels[prediction.argmax()] 
+                        print(label)# get the label with max accuracy
                     else:
                         label = "None"
 

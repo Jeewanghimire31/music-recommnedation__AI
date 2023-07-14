@@ -35,8 +35,14 @@ def video():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
+<<<<<<< HEAD
 @app.route("/emotion-parameters", methods=["GET", "POST"])
 def getEmotionParameters():
+=======
+
+@app.route("/videoapi", methods=["GET", "POST"])
+def videoapi():
+>>>>>>> a76d54a (add: model)
     return camera.get_label()
 
 @app.route("/ping", methods=["GET"])

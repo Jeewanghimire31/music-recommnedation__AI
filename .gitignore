@@ -26,7 +26,12 @@ venv.bak/
 
 # mypy
 <<<<<<< HEAD
+<<<<<<< HEAD
 .mypy_cache/
 =======
 .mypy_cache/
 >>>>>>> fa2a66a (requirement.txt for package required)
+=======
+.mypy_cache/
+pramesh3.h5
+>>>>>>> a76d54a (add: model)
