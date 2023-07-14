@@ -1,8 +1,10 @@
 import glob
 import os
 import random
+
 from flask import Flask, Response, render_template
 from flask_cors import CORS
+
 from camera import Video
 
 app = Flask(__name__)
@@ -33,9 +35,14 @@ def video():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-@app.route("/videoapi", methods=["GET", "POST"])
-def videoapi():
+@app.route("/emotion-parameters", methods=["GET", "POST"])
+def getEmotionParameters():
     return camera.get_label()
+
+@app.route("/ping", methods=["GET"])
+def ping():
+    return "Pong!"
+
 
 if __name__ == "__main__":
     app.run(debug=True)

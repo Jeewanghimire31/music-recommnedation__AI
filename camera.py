@@ -8,7 +8,7 @@ import numpy as np
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 face_classifier = cv2.CascadeClassifier(f'{root_path}/static/haarcascade.xml')
-classifier = load_model(f'{root_path}/model.h5')
+classifier = load_model(f'{root_path}/model5.h5')
 emotion_labels = ['Happy', 'Neutral', 'Sad']
 
 
