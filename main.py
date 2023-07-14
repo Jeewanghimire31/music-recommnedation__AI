@@ -39,6 +39,17 @@ def video():
 def getEmotionParameters():
     return camera.get_label()
 
+@app.route("/close-camera", methods=["GET", "POST"])
+def closeCamera():
+    camera.__del__()
+    camera.emotionParameters = {}
+    return "Camera closed"
+
+@app.route("/open-camera", methods=["GET", "POST"])
+def openCamera():
+    camera.openCamera()
+    return "Camera opened"
+
 @app.route("/ping", methods=["GET"])
 def ping():
     return "Pong!"
