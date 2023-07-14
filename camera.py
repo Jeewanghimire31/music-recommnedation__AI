@@ -25,7 +25,11 @@ class Video(object):
             self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
     def __del__(self):
-        self.camera.release()
+        try:
+         self.camera.release()
+        except Exception as exp:
+         print(exp)
+            
 
     def get_frame(self, reset_predictions):
         try:
